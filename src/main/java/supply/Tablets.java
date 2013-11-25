@@ -23,7 +23,7 @@ public class Tablets extends Equipment {
 	 */
 	public Tablets(OS osType) {
 		super();
-		this.setType("Tablets");
+		this.setType(Type.TABLETS);
 		this.setOs(osType);
 	}
 

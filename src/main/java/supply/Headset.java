@@ -13,6 +13,6 @@ public class Headset extends Equipment {
 	 */
 	public Headset() {
 		super();
-		this.setType("Headset");
+		this.setType(Type.HEADSET);
 	}
 }

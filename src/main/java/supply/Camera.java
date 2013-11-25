@@ -13,6 +13,6 @@ public class Camera extends Equipment {
 	 */
 	public Camera() {
 		super();
-		this.setType("Camera");
+		this.setType(Type.CAMERA);
 	}
 }

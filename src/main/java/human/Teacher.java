@@ -8,16 +8,16 @@ package human;
  */
 
 public class Teacher extends Borrower {
+	
 
 	/**
 	 * Create a teacher with a specific term borrowing.
 	 * 
 	 * @param termBorrowing
 	 */
-	public Teacher(int termBorrowing) {
-		super();
+	public Teacher(int termBorrowing, String id) {
+		super(id,termBorrowing,0);
 		this.setTeacher(true);
-		this.setTermBorrowing(termBorrowing);
 	}
 
 	/**
@@ -25,7 +25,7 @@ public class Teacher extends Borrower {
 	 * boolean isTeacher to true
 	 */
 	public Teacher() {
-		this(0);
+		this(0,null);
 	}
 
 }

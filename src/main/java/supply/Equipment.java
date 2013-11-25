@@ -8,7 +8,7 @@ package supply;
  */
 public abstract class Equipment {
 
-	private String type;
+	private Type type;
 	private OS os;
 
 	/**
@@ -23,7 +23,7 @@ public abstract class Equipment {
 	 * 
 	 * @return the type of the equipment
 	 */
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 
@@ -32,7 +32,7 @@ public abstract class Equipment {
 	 * 
 	 * @param type
 	 */
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 

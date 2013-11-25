@@ -1,7 +1,5 @@
 package stockpile;
 
-import supply.Item;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class Stock {
 	public Stock(List<Item> objectList) {
 		this.objectList = objectList;
 	}
-	
+
 	/**
 	 * Create a stock with a default empty list of items.
 	 */
@@ -41,6 +39,7 @@ public class Stock {
 
 	/**
 	 * Set the list of items
+	 * 
 	 * @param objectList
 	 */
 	public void setObjectList(List<Item> objectList) {
