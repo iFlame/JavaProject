@@ -1,5 +1,7 @@
 package human;
 
+import stockpile.Reservation;
+
 /**
  * This class create a Stock administator who handle the stock
  * 
@@ -9,12 +11,32 @@ package human;
 public class StockAdministrator extends User {
 
 	/**
-	 * Create a StockAdministrato, call the super of the class User and change
-	 * the value of the boolean StockAdmin to true
+	 * Create a new StockAdministrator in a specific structure.
+	 * 
+	 * @param struct
+	 */
+	public StockAdministrator(Structure struct) {
+		super(struct);
+		this.setStockAdmin(true);
+	}
+
+	/**
+	 * Create a default StockAdministrator with a null as a structure.
 	 */
 	public StockAdministrator() {
-		super();
-		this.setStockAdmin(true);
+		this(null);
+	}
+
+	/**
+	 * 
+	 * @param reserv
+	 * @return true if the equipment is available in the stock
+	 */
+	public boolean validation(Reservation reserv) {
+		if (this.getUserStructure().getStock().isAvailable(reserv)) {
+			return true;
+		}
+		return false;
 	}
 
 }

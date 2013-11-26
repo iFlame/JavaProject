@@ -1,5 +1,7 @@
 package human;
 
+import human.Structure;
+
 /**
  * This class create all the user, they can be stock administator or a teacher
  * or a student.
@@ -10,12 +12,23 @@ package human;
 public abstract class User {
 
 	private boolean isStockAdmin;
+	private Structure userStructure;
+
+	/**
+	 * Create an user with a specific structure.
+	 * 
+	 * @param structure
+	 */
+	public User(Structure structure) {
+		this.userStructure = structure;
+		this.isStockAdmin = false;
+	}
 
 	/**
 	 * This is the constructor, a default User is not a stock Administrator.
 	 */
 	public User() {
-		this.isStockAdmin = false;
+		this(null);
 	}
 
 	/**
@@ -33,5 +46,13 @@ public abstract class User {
 	 */
 	public void setStockAdmin(boolean isStockAdmin) {
 		this.isStockAdmin = isStockAdmin;
+	}
+
+	public Structure getUserStructure() {
+		return userStructure;
+	}
+
+	public void setUserStructure(Structure userStructure) {
+		this.userStructure = userStructure;
 	}
 }

@@ -1,6 +1,6 @@
 package stockpile;
 
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * This class create a reservation. She contains the date of the start of the
@@ -12,8 +12,8 @@ import java.util.Date;
  */
 public class Reservation {
 
-	private Date beginDate;
-	private Date endDate;
+	private Calendar beginDate;
+	private Calendar endDate;
 	private String reservatorID;
 
 	/**
@@ -23,7 +23,7 @@ public class Reservation {
 	 * @param date1
 	 * @param date2
 	 */
-	public Reservation(String id, Date date1, Date date2) {
+	public Reservation(String id, Calendar date1, Calendar date2) {
 		this.reservatorID = id;
 		this.beginDate = date1;
 		this.endDate = date2;
@@ -40,7 +40,7 @@ public class Reservation {
 	 * 
 	 * @return the date of the beginning of the reservation
 	 */
-	public Date getBeginDate() {
+	public Calendar getBeginDate() {
 		return beginDate;
 	}
 
@@ -49,7 +49,7 @@ public class Reservation {
 	 * 
 	 * @param beginDate
 	 */
-	public void setBeginDate(Date beginDate) {
+	public void setBeginDate(Calendar beginDate) {
 		this.beginDate = beginDate;
 	}
 
@@ -57,7 +57,7 @@ public class Reservation {
 	 * 
 	 * @return the date of the end of reservation
 	 */
-	public Date getEndDate() {
+	public Calendar getEndDate() {
 		return endDate;
 	}
 
@@ -66,7 +66,7 @@ public class Reservation {
 	 * 
 	 * @param endDate
 	 */
-	public void setEndDate(Date endDate) {
+	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
 

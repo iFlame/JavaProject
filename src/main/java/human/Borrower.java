@@ -1,7 +1,9 @@
 package human;
 
-import java.util.Date;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
+import stockpile.Reservation;
 import supply.Equipment;
 
 /**
@@ -26,8 +28,9 @@ public abstract class Borrower extends User {
 	 * @param id
 	 * @param termBorrowing
 	 */
-	public Borrower(String id, int termBorrowing, int borrowNumber) {
-		super();
+	public Borrower(String id, int termBorrowing, int borrowNumber,
+			Structure struct) {
+		super(struct);
 		this.id = id;
 		this.termBorrowing = termBorrowing;
 		this.isTeacher = false;
@@ -39,7 +42,7 @@ public abstract class Borrower extends User {
 	 * Default user are not teachers.
 	 */
 	public Borrower() {
-		this(null, 0, 0);
+		this(null, 0, 0, null);
 	}
 
 	/**
@@ -53,18 +56,58 @@ public abstract class Borrower extends User {
 	 * @param endDate
 	 * @return true if the reservation succeed
 	 */
-	public boolean reservation(int termBorrow, int borrowNum,
-			Equipment equipment, Date beginDate, Date endDate) {
-		if (termBorrow <= termBorrowing) {
-			for (int i = 0; (i < borrowNumber) && (i < borrowNum); i++) {
-				// TODO : check if the equipment is avalaible and if everything
-				// is ok.
-			}
+	public boolean reservation(Equipment equipment, Calendar beginDate,
+			Calendar endDate) {
+		// TODO : Demander a kevin !!!!!!!!!
+		changeDate(beginDate);
+		changeDate(endDate);
+		if (getReservationTime(beginDate, endDate) <= termBorrowing) {
+			Reservation reserv = new Reservation(id, beginDate, endDate);
+			this.getUserStructure().getStock().getUndoReservation().add(reserv);
+			// TODO : Probleme pour savoir si la reservation a été validé ou
+			// non.
 		} else {
 			return false;
 		}
-
+		// TODO : devra etre supprimé une fois le 2eme TODO terminié
 		return false;
+	}
+
+	/**
+	 * 
+	 * @param equipment
+	 * @param endDate
+	 * @return true if the borrow have been succeed and false if not
+	 */
+	public boolean borrow(Equipment equipment, Calendar endDate) {
+		Calendar actualDate = Calendar.getInstance();
+		return reservation(equipment, actualDate, endDate);
+	}
+
+	/**
+	 * Check if the date if lenient or not, if the date is not good change it.
+	 * 
+	 * @param date
+	 * @return
+	 */
+	private Calendar changeDate(Calendar date) {
+		if (!date.isLenient()) {
+			date.setLenient(true);
+			return date;
+		}
+		return date;
+	}
+
+	/**
+	 * 
+	 * @param beginDate
+	 * @param endDate
+	 * @return the value of the time between the two dates
+	 */
+	private long getReservationTime(Calendar beginDate, Calendar endDate) {
+		long termBorrow = TimeUnit.DAYS.convert(beginDate.getTimeInMillis()
+				- endDate.getTimeInMillis(), TimeUnit.MILLISECONDS);
+		return termBorrow;
 	}
 
 	/**

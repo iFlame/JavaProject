@@ -8,10 +8,9 @@ package human;
  * 
  */
 public class Student extends Borrower {
-	
+
 	private static final int STUDENTTERMBORROWING = 7;
 	private static final int BORROWNUMBER = 1;
-	
 
 	/**
 	 * Create a student with a specific id, who can do only one borrow and for a
@@ -19,15 +18,15 @@ public class Student extends Borrower {
 	 * 
 	 * @param termBorrow
 	 */
-	public Student(String id) {
-		super(id, STUDENTTERMBORROWING, BORROWNUMBER);
+	public Student(String id, Structure struct) {
+		super(id, STUDENTTERMBORROWING, BORROWNUMBER, struct);
 	}
 
 	/**
 	 * Create a default student.
 	 */
 	public Student() {
-		this(null);
+		this(null, null);
 	}
 
 	public static int getStudenttermborrowing() {
