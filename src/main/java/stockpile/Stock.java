@@ -1,7 +1,9 @@
 package stockpile;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Create a stock with a list of items
@@ -38,8 +40,36 @@ public class Stock {
 	 *         dates give by the user
 	 */
 	public boolean isAvailable(Reservation reserv) {
-		//TODO :
-		return true;
+		for (Item item : objectList) {
+			if ((reserv != null) && (item.getEquipment() != null)
+					&& (item.getEquipment().equals(reserv.getEquipment()))
+					&& (timeAvailable(item, reserv.getBeginDate()))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param item
+	 * @param beginDate
+	 * @param endDate
+	 * @return if an item is available during the time given by the user
+	 */
+	private boolean timeAvailable(Item item, Calendar beginDate) {
+		if ((item != null) && (beginDate != null)) {
+			for (Reservation reserv : item.getReservationList()) {
+				if ((reserv.getEndDate() != null)
+						&& (TimeUnit.DAYS.convert(
+								reserv.getEndDate().getTimeInMillis()
+										- beginDate.getTimeInMillis(),
+								TimeUnit.MILLISECONDS)) > 0) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	/**

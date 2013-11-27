@@ -1,10 +1,10 @@
 package human;
 
-import human.Structure;
+import stockpile.Stock;
 
 /**
  * This class create all the user, they can be stock administator or a teacher
- * or a student.
+ * or a student. All the user have to specify the stock who they interact with.
  * 
  * @author user
  * 
@@ -12,23 +12,16 @@ import human.Structure;
 public abstract class User {
 
 	private boolean isStockAdmin;
-	private Structure userStructure;
+	private Stock stock;
 
 	/**
-	 * Create an user with a specific structure.
+	 * Create a default User with a specific stock.
 	 * 
 	 * @param structure
 	 */
-	public User(Structure structure) {
-		this.userStructure = structure;
+	public User(Stock stock) {
+		this.stock = stock;
 		this.isStockAdmin = false;
-	}
-
-	/**
-	 * This is the constructor, a default User is not a stock Administrator.
-	 */
-	public User() {
-		this(null);
 	}
 
 	/**
@@ -48,11 +41,12 @@ public abstract class User {
 		this.isStockAdmin = isStockAdmin;
 	}
 
-	public Structure getUserStructure() {
-		return userStructure;
+	public Stock getStock() {
+		return stock;
 	}
 
-	public void setUserStructure(Structure userStructure) {
-		this.userStructure = userStructure;
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
+
 }

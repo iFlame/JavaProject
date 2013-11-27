@@ -1,5 +1,7 @@
 package human;
 
+import stockpile.Stock;
+
 /**
  * Create a Teacher who can borrow some stuff of the stock or reserve.
  * 
@@ -14,8 +16,8 @@ public class Teacher extends Borrower {
 	 * 
 	 * @param termBorrowing
 	 */
-	public Teacher(int termBorrowing, String id, Structure struct) {
-		super(id, termBorrowing, 0, struct);
+	public Teacher(int termBorrowing, String id, Stock stock) {
+		super(id, termBorrowing, 0, stock);
 		this.setTeacher(true);
 	}
 
@@ -24,7 +26,7 @@ public class Teacher extends Borrower {
 	 * boolean isTeacher to true
 	 */
 	public Teacher() {
-		this(0, null, null);
+		this(0, null,null);
 	}
 
 }

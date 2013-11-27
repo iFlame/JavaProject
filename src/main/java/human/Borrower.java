@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import stockpile.Reservation;
+import stockpile.Stock;
 import supply.Equipment;
 
 /**
@@ -28,48 +29,38 @@ public abstract class Borrower extends User {
 	 * @param id
 	 * @param termBorrowing
 	 */
-	public Borrower(String id, int termBorrowing, int borrowNumber,
-			Structure struct) {
-		super(struct);
+	public Borrower(String id, int termBorrowing, int borrowiNumber, Stock stock) {
+		super(stock);
 		this.id = id;
 		this.termBorrowing = termBorrowing;
 		this.isTeacher = false;
-		this.borrowNumber = borrowNumber;
-	}
-
-	/**
-	 * Create a Borrower, calling the super constructor of the class User.
-	 * Default user are not teachers.
-	 */
-	public Borrower() {
-		this(null, 0, 0, null);
+		this.borrowNumber = borrowiNumber;
 	}
 
 	/**
 	 * Create a new reservation if all the condition are respected ( term
-	 * borrowing and borrow number )
+	 * borrowing and borrow number.
 	 * 
+	 * @throws java.null.pointer exception
 	 * @param termBorrow
 	 * @param borrowNum
 	 * @param equipment
 	 * @param beginDate
 	 * @param endDate
-	 * @return true if the reservation succeed
+	 * @return true if the reservation is add to the undoReservation List, ie
+	 *         that the ask for the reservation has been made to the stock
+	 *         adminitrator
 	 */
 	public boolean reservation(Equipment equipment, Calendar beginDate,
 			Calendar endDate) {
-		// TODO : Demander a kevin !!!!!!!!!
-		changeDate(beginDate);
-		changeDate(endDate);
-		if (getReservationTime(beginDate, endDate) <= termBorrowing) {
-			Reservation reserv = new Reservation(id, beginDate, endDate);
-			this.getUserStructure().getStock().getUndoReservation().add(reserv);
-			// TODO : Probleme pour savoir si la reservation a été validé ou
-			// non.
-		} else {
-			return false;
+		long termBorrow = TimeUnit.DAYS.convert(beginDate.getTimeInMillis()
+				- endDate.getTimeInMillis(), TimeUnit.MILLISECONDS);
+		if (termBorrow <= termBorrowing) {
+			Reservation reserv = new Reservation(id, equipment, beginDate,
+					endDate);
+			getStock().getUndoReservation().add(reserv);
+			return true;
 		}
-		// TODO : devra etre supprimé une fois le 2eme TODO terminié
 		return false;
 	}
 
@@ -79,35 +70,9 @@ public abstract class Borrower extends User {
 	 * @param endDate
 	 * @return true if the borrow have been succeed and false if not
 	 */
-	public boolean borrow(Equipment equipment, Calendar endDate) {
+	public void borrow(Equipment equipment, Calendar endDate) {
 		Calendar actualDate = Calendar.getInstance();
-		return reservation(equipment, actualDate, endDate);
-	}
-
-	/**
-	 * Check if the date if lenient or not, if the date is not good change it.
-	 * 
-	 * @param date
-	 * @return
-	 */
-	private Calendar changeDate(Calendar date) {
-		if (!date.isLenient()) {
-			date.setLenient(true);
-			return date;
-		}
-		return date;
-	}
-
-	/**
-	 * 
-	 * @param beginDate
-	 * @param endDate
-	 * @return the value of the time between the two dates
-	 */
-	private long getReservationTime(Calendar beginDate, Calendar endDate) {
-		long termBorrow = TimeUnit.DAYS.convert(beginDate.getTimeInMillis()
-				- endDate.getTimeInMillis(), TimeUnit.MILLISECONDS);
-		return termBorrow;
+		reservation(equipment, actualDate, endDate);
 	}
 
 	/**

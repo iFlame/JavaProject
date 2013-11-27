@@ -1,5 +1,7 @@
 package human;
 
+import stockpile.Stock;
+
 /**
  * This class create a Student who can borrow some stuff in the Stock but for
  * less time than a teacher.
@@ -9,8 +11,8 @@ package human;
  */
 public class Student extends Borrower {
 
-	private static final int STUDENTTERMBORROWING = 7;
-	private static final int BORROWNUMBER = 1;
+	private static final int STUDENT_TERM_BORROWING = 7;
+	private static final int BORROW_NUMBER_MAX = 1;
 
 	/**
 	 * Create a student with a specific id, who can do only one borrow and for a
@@ -18,8 +20,8 @@ public class Student extends Borrower {
 	 * 
 	 * @param termBorrow
 	 */
-	public Student(String id, Structure struct) {
-		super(id, STUDENTTERMBORROWING, BORROWNUMBER, struct);
+	public Student(String id, Stock stock) {
+		super(id, STUDENT_TERM_BORROWING, BORROW_NUMBER_MAX, stock);
 	}
 
 	/**
@@ -30,10 +32,10 @@ public class Student extends Borrower {
 	}
 
 	public static int getStudenttermborrowing() {
-		return STUDENTTERMBORROWING;
+		return STUDENT_TERM_BORROWING;
 	}
 
-	public static int getBorrownumber() {
-		return BORROWNUMBER;
+	public static int getBorrownumberMax() {
+		return BORROW_NUMBER_MAX;
 	}
 }

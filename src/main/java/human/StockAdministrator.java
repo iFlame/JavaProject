@@ -1,6 +1,7 @@
 package human;
 
 import stockpile.Reservation;
+import stockpile.Stock;
 
 /**
  * This class create a Stock administator who handle the stock
@@ -15,13 +16,13 @@ public class StockAdministrator extends User {
 	 * 
 	 * @param struct
 	 */
-	public StockAdministrator(Structure struct) {
-		super(struct);
+	public StockAdministrator(Stock stock) {
+		super(stock);
 		this.setStockAdmin(true);
 	}
 
 	/**
-	 * Create a default StockAdministrator with a null as a structure.
+	 * Create a default StockAdministrator with a null at stock
 	 */
 	public StockAdministrator() {
 		this(null);
@@ -29,11 +30,14 @@ public class StockAdministrator extends User {
 
 	/**
 	 * 
+	 * @throws java.null.pointer exception
 	 * @param reserv
-	 * @return true if the equipment is available in the stock
+	 * @return true if the reservation has succeed that the user will have his
+	 *         equipment.
 	 */
 	public boolean validation(Reservation reserv) {
-		if (this.getUserStructure().getStock().isAvailable(reserv)) {
+		if (getStock().isAvailable(reserv)) {
+			reserv.setValidate(true);
 			return true;
 		}
 		return false;

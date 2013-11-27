@@ -2,6 +2,8 @@ package stockpile;
 
 import java.util.Calendar;
 
+import supply.Equipment;
+
 /**
  * This class create a reservation. She contains the date of the start of the
  * reservation and a date of then end of the reservation and the ID of the
@@ -11,7 +13,9 @@ import java.util.Calendar;
  * 
  */
 public class Reservation {
-
+	
+	private Equipment equipment;
+	private boolean validate;
 	private Calendar beginDate;
 	private Calendar endDate;
 	private String reservatorID;
@@ -23,17 +27,19 @@ public class Reservation {
 	 * @param date1
 	 * @param date2
 	 */
-	public Reservation(String id, Calendar date1, Calendar date2) {
+	public Reservation(String id,Equipment equipment , Calendar date1, Calendar date2) {
 		this.reservatorID = id;
 		this.beginDate = date1;
 		this.endDate = date2;
+		this.validate = false;
+		this.equipment=equipment;
 	}
 
 	/**
 	 * Create a default reservation with all at null
 	 */
 	public Reservation() {
-		this(null, null, null);
+		this(null, null,null, null);
 	}
 
 	/**
@@ -85,6 +91,22 @@ public class Reservation {
 	 */
 	public void setReservatorID(String reservatorID) {
 		this.reservatorID = reservatorID;
+	}
+
+	public boolean isValidate() {
+		return validate;
+	}
+
+	public void setValidate(boolean validate) {
+		this.validate = validate;
+	}
+
+	public Equipment getEquipment() {
+		return equipment;
+	}
+
+	public void setEquipment(Equipment equipment) {
+		this.equipment = equipment;
 	}
 
 }

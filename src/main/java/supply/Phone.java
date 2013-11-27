@@ -16,6 +16,7 @@ public class Phone extends Equipment {
 	 */
 	public Phone(OS os) {
 		super();
+		this.setType(Type.PHONE);
 		this.setOs(os);
 	}
 
