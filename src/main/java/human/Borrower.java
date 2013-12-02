@@ -20,7 +20,6 @@ public abstract class Borrower extends User {
 
 	private boolean isTeacher;
 	private int termBorrowing;
-	private String id;
 	private int borrowNumber;
 
 	/**
@@ -30,8 +29,7 @@ public abstract class Borrower extends User {
 	 * @param termBorrowing
 	 */
 	public Borrower(String id, int termBorrowing, int borrowiNumber, Stock stock) {
-		super(stock);
-		this.id = id;
+		super(stock,id);
 		this.termBorrowing = termBorrowing;
 		this.isTeacher = false;
 		this.borrowNumber = borrowiNumber;
@@ -56,7 +54,7 @@ public abstract class Borrower extends User {
 		long termBorrow = TimeUnit.DAYS.convert(beginDate.getTimeInMillis()
 				- endDate.getTimeInMillis(), TimeUnit.MILLISECONDS);
 		if (termBorrow <= termBorrowing) {
-			Reservation reserv = new Reservation(id, equipment, beginDate,
+			Reservation reserv = new Reservation(this.getId(), equipment, beginDate,
 					endDate);
 			getStock().getUndoReservation().add(reserv);
 			return true;
@@ -102,14 +100,6 @@ public abstract class Borrower extends User {
 
 	public void setTermBorrowing(int termBorrowing) {
 		this.termBorrowing = termBorrowing;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public int getBorrowNumber() {

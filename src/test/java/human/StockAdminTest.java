@@ -14,7 +14,6 @@ import stockpile.Reservation;
 import stockpile.Stock;
 import supply.Equipment;
 import supply.Tablets;
-import human.Borrower;
 
 
 public class StockAdminTest {
@@ -22,7 +21,6 @@ public class StockAdminTest {
 	private StockAdministrator stockAdmin;
 	private StockAdministrator stockAdmin2;
 	private Reservation reserv;
-	private Reservation reserv2;
 
 	private Stock stock;
 	private Equipment equip;
@@ -37,9 +35,8 @@ public class StockAdminTest {
 		equip = new Tablets();
 		date1 = Calendar.getInstance();
 		reserv = new Reservation("test",equip,date1,date2);
-		reserv2 = new Reservation();
 		stockAdmin = new StockAdministrator();
-		stockAdmin2 = new StockAdministrator(stock);
+		stockAdmin2 = new StockAdministrator(stock,"test");
 		equip = new Tablets();
 		reservList = new ArrayList<>();
 		reservList.add(reserv);
@@ -55,7 +52,6 @@ public class StockAdminTest {
 		stockAdmin = null;
 		stockAdmin2 = null;
 		reserv = null;
-		reserv2 = null;
 	}
 	
 	@Test

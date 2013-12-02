@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import supply.Equipment;
+
 /**
  * Create a stock with a list of items
  * 
@@ -70,6 +72,26 @@ public class Stock {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * This method check if there is enough equipment in the stock
+	 * 
+	 * @param equipment
+	 * @param reservationNumber
+	 * @return true if there is enough equipment in the stock
+	 */
+	public boolean getEquipmentNumber(Equipment equipment, int reservationNumber) {
+		int reservNumber = 0;
+		for (Item item : objectList) {
+			if (item.getEquipment().equals(equipment)) {
+				reservNumber++;
+			}
+		}
+		if (reservNumber > reservationNumber) {
+			return false;
+		}
+		return true;
 	}
 
 	/**

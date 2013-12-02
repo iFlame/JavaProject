@@ -1,5 +1,6 @@
 package human;
 
+import stockinterface.Constant;
 import stockpile.Stock;
 
 /**
@@ -13,17 +14,24 @@ public abstract class User {
 
 	private boolean isStockAdmin;
 	private Stock stock;
+	private String id;
 
 	/**
 	 * Create a default User with a specific stock.
 	 * 
 	 * @param structure
 	 */
-	public User(Stock stock) {
+	public User(Stock stock, String id) {
+		this.id = id;
 		this.stock = stock;
 		this.isStockAdmin = false;
 	}
 
+	public String print() {
+		return Constant.PRINT + id;
+	}
+	
+	
 	/**
 	 * 
 	 * @return the value of the boolean StockAdmin
@@ -47,6 +55,14 @@ public abstract class User {
 
 	public void setStock(Stock stock) {
 		this.stock = stock;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

@@ -16,8 +16,8 @@ public class StockAdministrator extends User {
 	 * 
 	 * @param struct
 	 */
-	public StockAdministrator(Stock stock) {
-		super(stock);
+	public StockAdministrator(Stock stock,String id) {
+		super(stock,id);
 		this.setStockAdmin(true);
 	}
 
@@ -25,7 +25,7 @@ public class StockAdministrator extends User {
 	 * Create a default StockAdministrator with a null at stock
 	 */
 	public StockAdministrator() {
-		this(null);
+		this(null,null);
 	}
 
 	/**
