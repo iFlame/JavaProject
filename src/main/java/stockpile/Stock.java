@@ -10,7 +10,7 @@ import supply.Equipment;
 /**
  * Create a stock with a list of items
  * 
- * @author user
+ * @author Guillaume borg & Quentin Cornevin
  * 
  */
 public class Stock {

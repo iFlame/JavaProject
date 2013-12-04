@@ -4,7 +4,7 @@ package supply;
  * Create a Tablet with different type of OS and extend from the class
  * Equipment.
  * 
- * @author user
+ * @author Guillaume borg & Quentin Cornevin
  * 
  */
 public class Tablets extends Equipment {

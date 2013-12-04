@@ -3,6 +3,13 @@ package stockinterface;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * This Class handle all the imput of the user
+ * 
+ * @author Guillaume borg & Quentin Cornevin
+ * 
+ */
+
 public class Imput {
 
 	private Scanner reader;
@@ -52,7 +59,6 @@ public class Imput {
 		} catch (InputMismatchException e) {
 			reader = new Scanner(System.in);
 			return Constant.WRONG_ANSWER;
-			
 		}
 	}
 

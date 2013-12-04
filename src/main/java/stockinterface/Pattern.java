@@ -1,18 +1,11 @@
 package stockinterface;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-
-import supply.Camera;
-import supply.Equipment;
-import supply.Headset;
-import supply.OS;
-import supply.Phone;
-import supply.Tablets;
-
+/**
+ * This class use to navigate between the menu
+ * 
+ * @author Guillaume borg & Quentin Cornevin
+ * 
+ */
 public class Pattern {
 
 	private Structure structure;
@@ -34,26 +27,20 @@ public class Pattern {
 	 * Run the menu
 	 */
 	public void run() {
-		Command command;
-		do {
-			display.welcome();
-			menu1();
-			command = imput.getCommand();
-		} while (!(command.equals(Command.QUIT)));
-		display.close();
+		display.welcome();
+		menu1();
 	}
 
 	/**
 	 * Run the first menu.
 	 */
 	private void menu1() {
-		int wrong;
 		int answer;
 		do {
 			display.menu1();
 			answer = imput.getInt();
-			wrong = choice2(answer);
-		} while (wrong == 3);
+			choice2(answer);
+		} while (true);
 	}
 
 	/**
@@ -62,15 +49,13 @@ public class Pattern {
 	 * @param imp
 	 * @return
 	 */
-	private int choice2(int imp) {
-		if (imp == 1) {
+	private void choice2(int imp) {
+		if (imp == Constant.CHOICE_ONE) {
 			menu21();
-			return 1;
-		} else if (imp == 2) {
+		} else if (imp == Constant.CHOICE_TWO) {
 			menu22();
-			return 1;
 		}
-		return 3;
+		display.wrongImput();
 	}
 
 	/**
@@ -79,99 +64,145 @@ public class Pattern {
 	 */
 	public void menu21() {
 		int answer;
-		while (true) {
+		boolean boucle = true;
+		while (boucle) {
 			display.menu21();
 			answer = imput.getInt();
 			choice3(answer);
+			if (answer == Constant.EXIT_NUMBER) {
+				boucle = false;
+			}
 		}
 	}
 
+	/**
+	 * This is the menu if the user want to change the parameter of the demo
+	 */
 	public void menu22() {
 		// TODO : Si jamais tu recréer tout sans passer par la démo.
 	}
 
+	/**
+	 * This method guide the interface if function of the hoice of the user
+	 * 
+	 * @param answer
+	 */
 	public void choice3(int answer) {
-		if (answer == 1) {
-			menu31();
-		} else if (answer == 2) {
-			menu32();
-		} else if (answer == 3) {
+		if (answer == Constant.CHOICE_ONE || answer == Constant.CHOICE_TWO) {
+			menu31(answer);
+		} else if (answer == Constant.CHOICE_THREE) {
 			menu33();
+		} else {
+			display.wrongImput();
 		}
-
 	}
 
 	/**
 	 * {@link} stockinterface.Display.menu31 Handle the interface if the user
 	 * decide to log as a teacher.
 	 */
-	private void menu31() {
-		int answer1;
-		int answer2;
-		display.menu31();
-		answer1 = imput.getInt();
-		print(Constant.QUESTION32);
-		answer2 = imput.getInt();
-		switch (answer1) {
-		case 1:
-			Equipment equip = new Tablets();
-			if (structure.getStock().getEquipmentNumber(equip, answer2)) {
-				// TODO : print si y assez de stuff
+	private void menu31(int borrowerType) {
+		int answer1 = Constant.EXIT_NUMBER;
+
+		boolean boucle = true;
+		boolean boucle2 = true;
+		boolean boucle3 = true;
+		boolean boucle4 = true;
+
+		while (boucle) {
+			display.menu31();
+			answer1 = imput.getInt();
+			if (answer1 == Constant.EXIT_NUMBER) {
+				boucle2 = false;
 			}
-			// TODO : print si y a pas assez de stuff
-			break;
-		case 2:
-			Equipment equip2 = new Phone();
-			if (structure.getStock().getEquipmentNumber(equip2, answer2)) {
-				// TODO : print si y assez de stuff
+			if ((Constant.EXIT_NUMBER <= answer1)
+					&& (answer1 <= Constant.CHOICE_FAUR)) {
+				boucle = false;
+			} else {
+				display.wrongImput();
 			}
-			// TODO : print si y a pas assez de stuff
-			break;
-		case 3:
-			Equipment equip3 = new Headset();
-			if (structure.getStock().getEquipmentNumber(equip3, answer2)) {
-				// TODO : print si y assez de stuff
-			}
-			// TODO : print si y a pas assez de stuff
-			break;
-		case 4:
-			Equipment equip4 = new Camera();
-			if (structure.getStock().getEquipmentNumber(equip4, answer2)) {
-				// TODO : print si y assez de stuff
-			}
-			// TODO : print si y a pas assez de stuff
-			break;
 		}
-	}
+		equipNumber(boucle2);
+		beginDate(boucle3);
+		endDate(boucle4);
 
-	private void menu32() {
-		// TODO Si l'utilisateur se connecte en tant qu'eleve
-	}
-
-	private void menu33() {
-		// TODO Si l'utilisateur print la liste des utilisateurs
+		// TODO : Si tout est ok créer la reservation.
 	}
 
 	/**
-	 * Print the message with a buffer
+	 * This is the part who ask the number of stuff the user need
 	 * 
-	 * @param message
+	 * @param boucle2
 	 */
-	public void print(String message) {
-		BufferedWriter out = null;
-		try {
-			out = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream(java.io.FileDescriptor.out), "ASCII"),
-					Constant.BUFFER_SIZE);
-		} catch (UnsupportedEncodingException e) {
-			throw new AssertionError(e);
-		}
-		try {
-			out.write(message);
-			out.flush();
-		} catch (IOException e) {
-			throw new AssertionError(e);
+	private void equipNumber(boolean boucle2) {
+		int answer2 = Constant.EXIT_NUMBER;
+		while (boucle2) {
+			display.question32();
+			answer2 = imput.getInt();
+			if (answer2 >= Constant.EXIT_NUMBER) {
+				boucle2 = false;
+			}
 		}
 	}
 
+	/**
+	 * Direct the menu for the begin date of the reservation
+	 * 
+	 * @param boucle
+	 */
+	private void beginDate(boolean boucle) {
+		int answer1 = Constant.EXIT_NUMBER;
+		int answer2 = Constant.EXIT_NUMBER;
+
+		while (boucle) {
+			display.beginDateDay();
+			answer1 = imput.getInt();
+			display.beingDateMonth();
+			answer2 = imput.getInt();
+			if (checkDate(answer1, answer2)) {
+				boucle = false;
+			}
+			display.incorrectDate();
+		}
+	}
+
+	/**
+	 * Check if the date is correct.
+	 * 
+	 * @param dayNumber
+	 * @param monthNumber
+	 * @return
+	 */
+	private boolean checkDate(int dayNumber, int monthNumber) {
+		return false;
+	}
+
+	/**
+	 * Ask the end of the date of the reservation at the user.
+	 * 
+	 * @param boucle
+	 */
+	private void endDate(boolean boucle) {
+		int answer1 = Constant.EXIT_NUMBER;
+		int answer2 = Constant.EXIT_NUMBER;
+
+		while (boucle) {
+			display.endDateDay();
+			answer1 = imput.getInt();
+			display.endDateMonth();
+			answer2 = imput.getInt();
+			if (checkDate(answer1, answer2)) {
+				boucle = false;
+			}
+			display.incorrectDate();
+		}
+	}
+
+	/**
+	 * This method ask the display to print the userList;
+	 */
+	private void menu33() {
+		String userList = structure.printUserList();
+		display.printUserList(userList);
+	}
 }

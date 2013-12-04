@@ -6,6 +6,13 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * This class display all the String of the project.
+ * 
+ * @author Guillaume borg & Quentin Cornevin
+ * 
+ */
+
 public class Display {
 
 	public Display() {
@@ -21,10 +28,12 @@ public class Display {
 	}
 
 	/**
-	 * Print the menu of close
+	 * Print an error message if the user don't give a good imput
 	 */
-	public void close() {
-		print(Constant.CLOSE);
+	public void wrongImput() {
+		print(Constant.WRONG_IMPUT);
+		print(Constant.NEWLINE);
+		print(Constant.NEWLINE);
 	}
 
 	/**
@@ -41,6 +50,11 @@ public class Display {
 		print(Constant.NEWLINE);
 	}
 
+	public void printUserList(String userList) {
+		print(userList);
+		print(Constant.NEWLINE);
+	}
+
 	/**
 	 * Print the menu if you chose the default demo. The menu propose to log as
 	 * a teacher or as student or to print the list of user
@@ -54,6 +68,9 @@ public class Display {
 		print(Constant.NEWLINE);
 		print(Constant.CHOICE23);
 		print(Constant.NEWLINE);
+		print(Constant.NEWLINE);
+		print(Constant.COMMAND);
+		print(Constant.NEWLINE);
 	}
 
 	/**
@@ -62,6 +79,7 @@ public class Display {
 	 */
 	public void menu31() {
 		print(Constant.MENU3);
+		print(Constant.NEWLINE);
 		print(Constant.NEWLINE);
 		print(Constant.QUESTION31);
 		print(Constant.NEWLINE);
@@ -73,6 +91,60 @@ public class Display {
 		print(Constant.NEWLINE);
 		print(Constant.ANSWER34);
 		print(Constant.NEWLINE);
+		print(Constant.NEWLINE);
+		print(Constant.COMMAND);
+		print(Constant.NEWLINE);
+	}
+
+	/**
+	 * Ask the user how many equipment he want to reserve
+	 */
+	public void question32() {
+		print(Constant.QUESTION32);
+		print(Constant.NEWLINE);
+	}
+
+	/**
+	 * Print the menu where we ask the user the day of the beginning of his
+	 * reservation
+	 */
+	public void beginDateDay() {
+		print(Constant.BEGINDATE1);
+		print(Constant.NEWLINE);
+		print(Constant.TODAY);
+		print(Constant.NEWLINE);
+	}
+
+	/**
+	 * Print the menu where we ask the user the month of the beginning of his
+	 * reservation
+	 */
+	public void beingDateMonth() {
+		print(Constant.BEGINDATE2);
+		print(Constant.NEWLINE);
+	}
+
+	public void incorrectDate() {
+		print(Constant.INCORRECTDATE);
+		print(Constant.NEWLINE);
+		print(Constant.NEWLINE);
+	}
+
+	public void endDateDay() {
+		print(Constant.ENDDATE1);
+		print(Constant.NEWLINE);
+	}
+
+	public void endDateMonth() {
+		print(Constant.ENDDATE2);
+		print(Constant.NEWLINE);
+	}
+
+	/**
+	 * Print an error message if there is not enough equipment in the stock
+	 */
+	public void equipNotEnough() {
+		// TODO :
 	}
 
 	/**
