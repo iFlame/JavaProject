@@ -3,6 +3,7 @@ package stockinterface;
 import human.User;
 
 import java.util.List;
+import java.util.TreeSet;
 
 import stockinterface.Constant;
 import stockpile.Stock;
@@ -17,7 +18,7 @@ import stockpile.Stock;
 public class Structure {
 
 	private Stock stock;
-	private List<User> userList;
+	private TreeSet<User> userList;
 
 	/**
 	 * Create a Structure with a specifique stock and list of user
@@ -25,7 +26,7 @@ public class Structure {
 	 * @param stock
 	 * @param list
 	 */
-	public Structure(Stock stock, List<User> list) {
+	public Structure(Stock stock, TreeSet<User> list) {
 		this.stock = stock;
 		this.userList = list;
 	}
@@ -51,11 +52,11 @@ public class Structure {
 		this.stock = stock;
 	}
 
-	public List<User> getUserList() {
+	public TreeSet<User> getUserList() {
 		return userList;
 	}
 
-	public void setUserList(List<User> userList) {
+	public void setUserList(TreeSet<User> userList) {
 		this.userList = userList;
 	}
 }

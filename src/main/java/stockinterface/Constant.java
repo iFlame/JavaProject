@@ -25,23 +25,25 @@ public final class Constant {
 	public static final int CHOICE_TWO = 2;
 	public static final int CHOICE_THREE = 3;
 	public static final int CHOICE_FAUR = 4;
+	public static final int MAX_MONTH = 12;
 
 	public static final int BUFFER_SIZE = 2048;
 	public static final String WELCOME = "Welcome to the menu.";
 	public static final String COMMAND = "Press 0 to go to the previous menu.";
 
 	public static final String WRONG_IMPUT = "Sorry you're imput is not acceptable.";
+	
+	public static final String WRONG_ID = "Sorry your id has not been found.";
 
 	public static final String MENU1 = "A demo have already been created, you can use it or create an other one.";
 	public static final String CHOICE1 = "1. Use the default demo.";
 	public static final String CHOICE2 = "2. Create a new demo.";
 
 	public static final String MENU2 = "Welcome to default demo.";
-	public static final String CHOICE21 = "1. Log as a teacher";
-	public static final String CHOICE22 = "2. Log as a Student";
-	public static final String CHOICE23 = "3. Print the list of user in the demo.";
+	public static final String CHOICE21 = "Enter your login. (It's your id)";
+	public static final String CHOICE22 = "Press 3 to print the list of the user register.";
 
-	public static final String MENU3 = "Welcome to the Teacher menu. ";
+	public static final String MENU3 = "Welcome to the borrower menu. ";
 	public static final String QUESTION31 = "What do you want to book ?";
 	public static final String ANSWER31 = "1. Tablet(s)";
 	public static final String ANSWER32 = "2. Phone(s)";

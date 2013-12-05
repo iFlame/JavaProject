@@ -2,6 +2,7 @@ package stockinterface;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import stockpile.*;
 import supply.*;
@@ -45,7 +46,7 @@ public class StockDemo {
 		/**
 		 * Creation of the new list of user to complete the structure
 		 */
-		List<User> userList = new ArrayList<>();
+		TreeSet<User> userList = new TreeSet<>();
 		for (int i = 0; i < USER_NUMBER; i++) {
 			User user1 = new Teacher(0, "defaultTeacher" + i, stock);
 			User user2 = new Student("defaultStudent" + i, stock);

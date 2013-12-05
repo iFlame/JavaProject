@@ -1,5 +1,11 @@
 package stockinterface;
 
+import human.Borrower;
+import human.User;
+
+import java.util.Calendar;
+import java.util.Iterator;
+
 /**
  * This class use to navigate between the menu
  * 
@@ -54,60 +60,64 @@ public class Pattern {
 			menu21();
 		} else if (imp == Constant.CHOICE_TWO) {
 			menu22();
-		}
-		display.wrongImput();
-	}
-
-	/**
-	 * Display the menu of the default demo
-	 * 
-	 */
-	public void menu21() {
-		int answer;
-		boolean boucle = true;
-		while (boucle) {
-			display.menu21();
-			answer = imput.getInt();
-			choice3(answer);
-			if (answer == Constant.EXIT_NUMBER) {
-				boucle = false;
-			}
-		}
-	}
-
-	/**
-	 * This is the menu if the user want to change the parameter of the demo
-	 */
-	public void menu22() {
-		// TODO : Si jamais tu recréer tout sans passer par la démo.
-	}
-
-	/**
-	 * This method guide the interface if function of the hoice of the user
-	 * 
-	 * @param answer
-	 */
-	public void choice3(int answer) {
-		if (answer == Constant.CHOICE_ONE || answer == Constant.CHOICE_TWO) {
-			menu31(answer);
-		} else if (answer == Constant.CHOICE_THREE) {
-			menu33();
 		} else {
 			display.wrongImput();
 		}
 	}
 
 	/**
+	 * Display the menu of the default demo
+	 * 
+	 */
+	private void menu21() {
+
+		String answer2 = null;
+		boolean boucle = true;
+		while (boucle) {
+			display.menu21();
+			answer2 = imput.getString();
+
+			for (User user : structure.getUserList()) {
+				if (answer2.equals(user.getId()) && (user.isStockAdmin())) {
+					// TODO : Si on a un stock Admin
+				} else if (answer2.equals(user.getId())) {
+					menu31(user.getId());
+				}
+			}
+
+			if (answer2.equals("3")) {
+				menu33();
+			} else if (answer2.equals("0")) {
+				boucle = false;
+			} else {
+				display.wrongID();
+			}
+
+		}
+	}
+
+	/**
+	 * This is the menu if the user want to change the parameter of the demo
+	 */
+	private void menu22() {
+		// TODO : Si jamais tu recréer tout sans passer par la démo.
+	}
+
+	/**
 	 * {@link} stockinterface.Display.menu31 Handle the interface if the user
 	 * decide to log as a teacher.
 	 */
-	private void menu31(int borrowerType) {
+	private void menu31(String userID) {
 		int answer1 = Constant.EXIT_NUMBER;
 
 		boolean boucle = true;
 		boolean boucle2 = true;
 		boolean boucle3 = true;
 		boolean boucle4 = true;
+
+		Calendar beginDate;
+		Calendar endDate;
+		
 
 		while (boucle) {
 			display.menu31();
@@ -123,9 +133,17 @@ public class Pattern {
 			}
 		}
 		equipNumber(boucle2);
-		beginDate(boucle3);
-		endDate(boucle4);
+		beginDate = beginDate(boucle3);
+		endDate = endDate(boucle4);
 
+		Iterator iter = structure.getUserList().iterator();
+		while(iter.hasNext()) {
+			Borrower borrower = (Borrower) iter.next();
+			if(userID.equals(borrower.getId())) {
+				borrower.reservation(null, beginDate, endDate); // TODO : remplacer le null !!!!
+			}
+		}
+		
 		// TODO : Si tout est ok créer la reservation.
 	}
 
@@ -135,12 +153,13 @@ public class Pattern {
 	 * @param boucle2
 	 */
 	private void equipNumber(boolean boucle2) {
+		boolean boucle = boucle2;
 		int answer2 = Constant.EXIT_NUMBER;
-		while (boucle2) {
+		while (boucle) {
 			display.question32();
 			answer2 = imput.getInt();
 			if (answer2 >= Constant.EXIT_NUMBER) {
-				boucle2 = false;
+				boucle = false;
 			}
 		}
 	}
@@ -150,9 +169,11 @@ public class Pattern {
 	 * 
 	 * @param boucle
 	 */
-	private void beginDate(boolean boucle) {
+	private Calendar beginDate(boolean boucle3) {
 		int answer1 = Constant.EXIT_NUMBER;
 		int answer2 = Constant.EXIT_NUMBER;
+		boolean boucle = boucle3;
+		Calendar cal = Calendar.getInstance();
 
 		while (boucle) {
 			display.beginDateDay();
@@ -161,9 +182,13 @@ public class Pattern {
 			answer2 = imput.getInt();
 			if (checkDate(answer1, answer2)) {
 				boucle = false;
+				cal.set(Calendar.DAY_OF_MONTH, answer1);
+				cal.set(Calendar.MONTH, answer2);
+				return cal;
 			}
 			display.incorrectDate();
 		}
+		return cal;
 	}
 
 	/**
@@ -174,17 +199,30 @@ public class Pattern {
 	 * @return
 	 */
 	private boolean checkDate(int dayNumber, int monthNumber) {
-		return false;
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.MONTH, monthNumber - 1);
+
+		if ((monthNumber < Constant.EXIT_NUMBER)
+				&& (monthNumber >= Constant.MAX_MONTH)
+				&& (dayNumber > cal.getActualMaximum(Calendar.DAY_OF_MONTH))) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
-	 * Ask the end of the date of the reservation at the user.
+	 * Ask the user the end of his reservation until he give a good date
 	 * 
-	 * @param boucle
+	 * @param boucle4
+	 * @return the checked End date of the reservation
 	 */
-	private void endDate(boolean boucle) {
+	private Calendar endDate(boolean boucle4) {
 		int answer1 = Constant.EXIT_NUMBER;
 		int answer2 = Constant.EXIT_NUMBER;
+
+		boolean boucle = boucle4;
+
+		Calendar cal = Calendar.getInstance();
 
 		while (boucle) {
 			display.endDateDay();
@@ -192,10 +230,14 @@ public class Pattern {
 			display.endDateMonth();
 			answer2 = imput.getInt();
 			if (checkDate(answer1, answer2)) {
-				boucle = false;
+				cal.set(Calendar.DAY_OF_MONTH, answer1);
+				cal.set(Calendar.MONTH, answer2);
+
+				return cal;
 			}
 			display.incorrectDate();
 		}
+		return cal;
 	}
 
 	/**

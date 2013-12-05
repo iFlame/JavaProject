@@ -13,6 +13,7 @@ import stockpile.Stock;
 public abstract class User {
 
 	private boolean isStockAdmin;
+	private boolean isTeacher;
 	private Stock stock;
 	private String id;
 
@@ -25,6 +26,7 @@ public abstract class User {
 		this.id = id;
 		this.stock = stock;
 		this.isStockAdmin = false;
+		this.isTeacher = false;
 	}
 
 	public String print() {
@@ -63,6 +65,14 @@ public abstract class User {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public boolean isTeacher() {
+		return isTeacher;
+	}
+
+	public void setTeacher(boolean isTeacher) {
+		this.isTeacher = isTeacher;
 	}
 
 }

@@ -13,38 +13,9 @@ import java.util.Scanner;
 public class Imput {
 
 	private Scanner reader;
-	private Command unknownCommand;
 
 	public Imput() {
 		reader = new Scanner(System.in);
-	}
-
-	public Command getCommand() {
-
-		Command command = null;
-		boolean quit = false;
-		boolean unknown = true;
-
-		do {
-
-			String word = reader.next();
-			readLine();
-
-			for (Command keyword : Command.values()) {
-				try {
-					if (keyword.toString().compareTo(word) == 0) {
-						return keyword;
-					}
-				} catch (IllegalArgumentException e) {
-					command = unknownCommand;
-				}
-			}
-			if (unknown) {
-				return Command.NOTHING;
-			}
-
-		} while (!quit);
-		return command;
 	}
 
 	/**
@@ -59,6 +30,16 @@ public class Imput {
 		} catch (InputMismatchException e) {
 			reader = new Scanner(System.in);
 			return Constant.WRONG_ANSWER;
+		}
+	}
+	
+	
+	public String getString() {
+		try {
+			return reader.next();
+		} catch (InputMismatchException e) {
+			reader = new Scanner(System.in);
+			return Constant.WRONG_IMPUT;
 		}
 	}
 

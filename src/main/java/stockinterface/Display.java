@@ -37,6 +37,15 @@ public class Display {
 	}
 
 	/**
+	 * Print an error message if the user don't give a good ID.
+	 */
+	public void wrongID() {
+		print(Constant.WRONG_ID);
+		print(Constant.NEWLINE);
+		print(Constant.NEWLINE);
+	}
+
+	/**
 	 * Print the first menu who propose to chose between default demo or insert
 	 * his own value.
 	 */
@@ -64,10 +73,8 @@ public class Display {
 		print(Constant.NEWLINE);
 		print(Constant.CHOICE21);
 		print(Constant.NEWLINE);
+		print(Constant.NEWLINE);
 		print(Constant.CHOICE22);
-		print(Constant.NEWLINE);
-		print(Constant.CHOICE23);
-		print(Constant.NEWLINE);
 		print(Constant.NEWLINE);
 		print(Constant.COMMAND);
 		print(Constant.NEWLINE);

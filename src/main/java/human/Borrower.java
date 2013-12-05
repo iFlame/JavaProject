@@ -18,7 +18,6 @@ import supply.Equipment;
 
 public abstract class Borrower extends User {
 
-	private boolean isTeacher;
 	private int termBorrowing;
 	private int borrowNumber;
 
@@ -31,7 +30,6 @@ public abstract class Borrower extends User {
 	public Borrower(String id, int termBorrowing, int borrowiNumber, Stock stock) {
 		super(stock,id);
 		this.termBorrowing = termBorrowing;
-		this.isTeacher = false;
 		this.borrowNumber = borrowiNumber;
 	}
 
@@ -71,23 +69,6 @@ public abstract class Borrower extends User {
 	public void borrow(Equipment equipment, Calendar endDate) {
 		Calendar actualDate = Calendar.getInstance();
 		reservation(equipment, actualDate, endDate);
-	}
-
-	/**
-	 * 
-	 * @return the value of the boolean isTeacher
-	 */
-	public boolean isTeacher() {
-		return isTeacher;
-	}
-
-	/**
-	 * Set the value of the boolean isTeacher
-	 * 
-	 * @param isTeacher
-	 */
-	public void setTeacher(boolean isTeacher) {
-		this.isTeacher = isTeacher;
 	}
 
 	/**
