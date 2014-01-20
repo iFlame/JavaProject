@@ -14,6 +14,9 @@ public class Imput {
 
 	private Scanner reader;
 
+	/**
+	 * Create an basic imput.
+	 */
 	public Imput() {
 		reader = new Scanner(System.in);
 	}
@@ -32,8 +35,12 @@ public class Imput {
 			return Constant.WRONG_ANSWER;
 		}
 	}
-	
-	
+
+	/**
+	 * Check if the user give a String
+	 * 
+	 * @return a checked String
+	 */
 	public String getString() {
 		try {
 			return reader.next();

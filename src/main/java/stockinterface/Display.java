@@ -15,6 +15,9 @@ import java.io.UnsupportedEncodingException;
 
 public class Display {
 
+	/**
+	 * Create a new display heritate from object.
+	 */
 	public Display() {
 		super();
 	}
@@ -59,6 +62,10 @@ public class Display {
 		print(Constant.NEWLINE);
 	}
 
+	/**
+	 * Print the user List
+	 * @param userList
+	 */
 	public void printUserList(String userList) {
 		print(userList);
 		print(Constant.NEWLINE);
@@ -104,6 +111,16 @@ public class Display {
 	}
 
 	/**
+	 * Print the stock Administrator menu
+	 */
+	public void menuStockAdmin() {
+		print(Constant.MENU4);
+		print(Constant.NEWLINE);
+		print(Constant.ANSWER41);
+		print(Constant.NEWLINE);
+	}
+
+	/**
 	 * Ask the user how many equipment he want to reserve
 	 */
 	public void question32() {
@@ -118,8 +135,6 @@ public class Display {
 	public void beginDateDay() {
 		print(Constant.BEGINDATE1);
 		print(Constant.NEWLINE);
-		print(Constant.TODAY);
-		print(Constant.NEWLINE);
 	}
 
 	/**
@@ -131,27 +146,41 @@ public class Display {
 		print(Constant.NEWLINE);
 	}
 
+	/**
+	 * Print the menu for wrong date.
+	 */
 	public void incorrectDate() {
 		print(Constant.INCORRECTDATE);
 		print(Constant.NEWLINE);
 		print(Constant.NEWLINE);
 	}
 
+	/**
+	 * Print the menu to get the end Date day
+	 */
 	public void endDateDay() {
 		print(Constant.ENDDATE1);
 		print(Constant.NEWLINE);
 	}
 
+	/**
+	 * Print the menu to get the end date month
+	 */
 	public void endDateMonth() {
 		print(Constant.ENDDATE2);
 		print(Constant.NEWLINE);
 	}
 
 	/**
-	 * Print an error message if there is not enough equipment in the stock
+	 * Print the menu if the reservation is done
+	 * @param reservDone
 	 */
-	public void equipNotEnough() {
-		// TODO :
+	public void reservDone(int reservDone) {
+		String reserv = String.valueOf(reservDone);
+		print(reserv);
+		print(Constant.RERSERVATIONSUCCES);
+		print(Constant.NEWLINE);
+		print(Constant.NEWLINE);
 	}
 
 	/**
@@ -175,4 +204,5 @@ public class Display {
 			throw new AssertionError(e);
 		}
 	}
+
 }

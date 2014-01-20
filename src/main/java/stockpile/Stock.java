@@ -43,9 +43,10 @@ public class Stock {
 	 */
 	public boolean isAvailable(Reservation reserv) {
 		for (Item item : objectList) {
-			if ((reserv != null) && (item.getEquipment() != null)
-					&& (item.getEquipment().equals(reserv.getEquipment()))
-					&& (timeAvailable(item, reserv.getBeginDate()))) {
+			if (item.getEquipment().getType()
+					.equals(reserv.getEquipment().getType())
+					&& (timeAvailable(item, reserv.getBeginDate(),
+							reserv.getEndDate()))) {
 				return true;
 			}
 		}
@@ -59,16 +60,21 @@ public class Stock {
 	 * @param endDate
 	 * @return if an item is available during the time given by the user
 	 */
-	private boolean timeAvailable(Item item, Calendar beginDate) {
-		if ((item != null) && (beginDate != null)) {
-			for (Reservation reserv : item.getReservationList()) {
-				if ((reserv.getEndDate() != null)
-						&& (TimeUnit.DAYS.convert(
-								reserv.getEndDate().getTimeInMillis()
-										- beginDate.getTimeInMillis(),
-								TimeUnit.MILLISECONDS)) > 0) {
-					return true;
-				}
+	private boolean timeAvailable(Item item, Calendar beginDate, Calendar endDat) {
+		if (item.getReservationList().isEmpty()) {
+			return true;
+		}
+		for (Reservation reserv : item.getReservationList()) {
+			long time = TimeUnit.DAYS.convert(reserv.getEndDate()
+					.getTimeInMillis() - beginDate.getTimeInMillis(),
+					TimeUnit.MILLISECONDS);
+			long time2 = TimeUnit.DAYS.convert(reserv.getBeginDate()
+					.getTimeInMillis() - endDat.getTimeInMillis(),
+					TimeUnit.MILLISECONDS);
+			if (time > 0) {
+				return true;
+			} else if ((time < 0) && (time2 > 0)) {
+				return true;
 			}
 		}
 		return false;

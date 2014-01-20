@@ -1,10 +1,17 @@
 package stockinterface;
 
 import human.Borrower;
+import human.StockAdministrator;
 import human.User;
 
 import java.util.Calendar;
-import java.util.Iterator;
+
+import stockpile.Reservation;
+import supply.Camera;
+import supply.Equipment;
+import supply.Headset;
+import supply.Phone;
+import supply.Tablets;
 
 /**
  * This class use to navigate between the menu
@@ -77,22 +84,41 @@ public class Pattern {
 			display.menu21();
 			answer2 = imput.getString();
 
+			if (answer2.equals("3")) {
+				menu33();
+			} else if (answer2.equals("0")) {
+				boucle = false;
+			}
+
 			for (User user : structure.getUserList()) {
 				if (answer2.equals(user.getId()) && (user.isStockAdmin())) {
-					// TODO : Si on a un stock Admin
+					stockAdmin();
 				} else if (answer2.equals(user.getId())) {
 					menu31(user.getId());
 				}
 			}
 
-			if (answer2.equals("3")) {
-				menu33();
-			} else if (answer2.equals("0")) {
-				boucle = false;
-			} else {
-				display.wrongID();
-			}
+		}
+	}
 
+	private void stockAdmin() {
+		boolean boucle = true;
+		int answer = Constant.EXIT_NUMBER;
+		while (boucle) {
+			display.menuStockAdmin();
+			answer = imput.getInt();
+			if (answer == Constant.CHOICE_ONE) {
+				for (User user : structure.getUserList()) {
+					if (user.getClass().equals(StockAdministrator.class)) {
+						StockAdministrator stockAd = (StockAdministrator) user;
+						for (Reservation reserv : structure.getStock()
+								.getUndoReservation()) {
+							stockAd.validation(reserv);
+						}
+						boucle = false;
+					}
+				}
+			}
 		}
 	}
 
@@ -109,15 +135,18 @@ public class Pattern {
 	 */
 	private void menu31(String userID) {
 		int answer1 = Constant.EXIT_NUMBER;
+		int numberEquip;
 
 		boolean boucle = true;
 		boolean boucle2 = true;
 		boolean boucle3 = true;
 		boolean boucle4 = true;
+		boolean boucle5 = true;
 
 		Calendar beginDate;
 		Calendar endDate;
-		
+
+		Equipment equip = null;
 
 		while (boucle) {
 			display.menu31();
@@ -127,24 +156,76 @@ public class Pattern {
 			}
 			if ((Constant.EXIT_NUMBER <= answer1)
 					&& (answer1 <= Constant.CHOICE_FAUR)) {
+				equip = choiceEquip(answer1);
 				boucle = false;
 			} else {
 				display.wrongImput();
 			}
 		}
-		equipNumber(boucle2);
+		numberEquip = equipNumber(boucle2);
 		beginDate = beginDate(boucle3);
 		endDate = endDate(boucle4);
 
-		Iterator iter = structure.getUserList().iterator();
-		while(iter.hasNext()) {
-			Borrower borrower = (Borrower) iter.next();
-			if(userID.equals(borrower.getId())) {
-				borrower.reservation(null, beginDate, endDate); // TODO : remplacer le null !!!!
+		int reservDone = numberEquip;
+		Reservation reserv = new Reservation(userID, equip, beginDate, endDate);
+
+		while (boucle5) {
+
+			if (structure.getStock().isAvailable(reserv)) {
+				for (User user : structure.getUserList()) {
+					boucle5 = menu5(user,userID,equip,beginDate,endDate,boucle5);
+				}
+				numberEquip--;
+				if (numberEquip == Constant.EXIT_NUMBER) {
+					boucle5 = false;
+				}
+			} else {
+				boucle5 = false;
 			}
 		}
-		
-		// TODO : Si tout est ok créer la reservation.
+		reservDone = reservDone - numberEquip;
+		reservationSucces(reservDone);
+
+	}
+	
+	private boolean menu5(User user, String userID, Equipment equip, Calendar beginDate, Calendar endDate, boolean boucle5) {
+		boolean boucle = boucle5;
+		if (Borrower.class.isAssignableFrom(user.getClass())
+				&& (user.getId().equals(userID))) {
+			Borrower b = (Borrower) user;
+			boucle = b.reservation(equip, beginDate, endDate);
+			return boucle;
+		}
+		return boucle;
+	}
+	
+	private void reservationSucces(int reservDone) {
+		display.reservDone(reservDone);
+	}
+
+	/**
+	 * Ask the user what equipment he want.
+	 * 
+	 * @param answer
+	 * @return
+	 */
+	private Equipment choiceEquip(int answer) {
+		Equipment equip = null;
+		switch (answer) {
+		case Constant.CHOICE_ONE:
+			equip = new Tablets();
+			return equip;
+		case Constant.CHOICE_TWO:
+			equip = new Phone();
+			return equip;
+		case Constant.CHOICE_THREE:
+			equip = new Headset();
+			return equip;
+		case Constant.CHOICE_FAUR:
+			equip = new Camera();
+			return equip;
+		}
+		return equip;
 	}
 
 	/**
@@ -152,7 +233,7 @@ public class Pattern {
 	 * 
 	 * @param boucle2
 	 */
-	private void equipNumber(boolean boucle2) {
+	private int equipNumber(boolean boucle2) {
 		boolean boucle = boucle2;
 		int answer2 = Constant.EXIT_NUMBER;
 		while (boucle) {
@@ -160,8 +241,10 @@ public class Pattern {
 			answer2 = imput.getInt();
 			if (answer2 >= Constant.EXIT_NUMBER) {
 				boucle = false;
+				return answer2;
 			}
 		}
+		return Constant.EXIT_NUMBER;
 	}
 
 	/**
@@ -203,8 +286,8 @@ public class Pattern {
 		cal.set(Calendar.MONTH, monthNumber - 1);
 
 		if ((monthNumber < Constant.EXIT_NUMBER)
-				&& (monthNumber >= Constant.MAX_MONTH)
-				&& (dayNumber > cal.getActualMaximum(Calendar.DAY_OF_MONTH))) {
+				|| (monthNumber >= Constant.MAX_MONTH)
+				|| (dayNumber > cal.getActualMaximum(Calendar.DAY_OF_MONTH))) {
 			return false;
 		}
 		return true;

@@ -2,18 +2,25 @@ package stockinterface;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeSet;
 
 import stockpile.*;
 import supply.*;
 import human.*;
 
+/**
+ * This class create a demo to show how the menu work
+ * 
+ * @author Guillaume borg & Quentin Cornevin
+ * 
+ */
 public class StockDemo {
 
 	private Pattern menu;
-	private static final int EQUIP_NUMBER=3;
-	private static final int USER_NUMBER=5;
+	private static final int EQUIP_NUMBER = 3;
 
+	/**
+	 * Create a speicif demo
+	 */
 	public StockDemo() {
 
 		/**
@@ -26,8 +33,8 @@ public class StockDemo {
 		 * Fill the itemList, with 2 phone and 2 talbets without reservation
 		 */
 		for (int i = 0; i < EQUIP_NUMBER; i++) {
-			Equipment equip = new Phone(OS.ANDROID);
-			Equipment equip2 = new Tablets(OS.IOS);
+			Phone equip = new Phone(OS.ANDROID);
+			Tablets equip2 = new Tablets(OS.IOS);
 			List<Reservation> reservList = new ArrayList<>();
 			List<Reservation> reservList2 = new ArrayList<>();
 			reservList.clear();
@@ -46,13 +53,13 @@ public class StockDemo {
 		/**
 		 * Creation of the new list of user to complete the structure
 		 */
-		TreeSet<User> userList = new TreeSet<>();
-		for (int i = 0; i < USER_NUMBER; i++) {
-			User user1 = new Teacher(0, "defaultTeacher" + i, stock);
-			User user2 = new Student("defaultStudent" + i, stock);
-			userList.add(user2);
-			userList.add(user1);
-		}
+		List<User> userList = new ArrayList<>();
+		User user1 = new Teacher(0, "Sander", stock);
+		User user2 = new Student("quentin", stock);
+		User user3 = new StockAdministrator(stock, "ali");
+		userList.add(user2);
+		userList.add(user1);
+		userList.add(user3);
 
 		/**
 		 * Creation of the new Structure

@@ -7,7 +7,7 @@ import stockpile.Stock;
  * This class create all the user, they can be stock administator or a teacher
  * or a student. All the user have to specify the stock who they interact with.
  * 
- * @author user
+ * @author Guillaume borg & Quentin Cornevin
  * 
  */
 public abstract class User {
@@ -29,11 +29,15 @@ public abstract class User {
 		this.isTeacher = false;
 	}
 
+	/**
+	 * Print the id of the user
+	 * 
+	 * @return the id of the user.
+	 */
 	public String print() {
 		return Constant.PRINT + id;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @return the value of the boolean StockAdmin

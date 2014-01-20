@@ -42,22 +42,28 @@ public final class Constant {
 	public static final String MENU2 = "Welcome to default demo.";
 	public static final String CHOICE21 = "Enter your login. (It's your id)";
 	public static final String CHOICE22 = "Press 3 to print the list of the user register.";
-
+	
 	public static final String MENU3 = "Welcome to the borrower menu. ";
 	public static final String QUESTION31 = "What do you want to book ?";
 	public static final String ANSWER31 = "1. Tablet(s)";
 	public static final String ANSWER32 = "2. Phone(s)";
 	public static final String ANSWER33 = "3. Headset(s)";
 	public static final String ANSWER34 = "4. Camera(s)";
+	public static final String ANSWER35 = "Press 5 to print the list of equipment in the stock.";
+	
+	public static final String MENU4 = "Welcome to the stock Administrator menu.";
+	public static final String ANSWER41 = "Press 1 to valide all the reservation.";	
+	
 	public static final String QUESTION32 = "How many of them do you want ?";
 
 	public static final String BEGINDATE1 = "Insert the day of the beginning of reservation (between 1 and 31) :";
-	public static final String TODAY = " Press 1 for today.";
 	public static final String BEGINDATE2 = "Insert the month when your reservation begin (between 1 and 12) :";
 
 	public static final String ENDDATE1 = "Insert the day of the end of your reservation.";
 	public static final String ENDDATE2 = "Insert the month of the end of your reservation.";
 
+	public static final String RERSERVATIONSUCCES = " reservation have succeed.";
+	
 	public static final String INCORRECTDATE = "Sorry your date does not exist.";
 
 	/**
