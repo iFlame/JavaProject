@@ -14,7 +14,7 @@ import supply.Equipment;
 import supply.Tablets;
 
 public class StockTest {
-
+/*
 	private Equipment equip1;
 	private Equipment equip2;
 	private List<Reservation> reservList1;
@@ -44,7 +44,7 @@ public class StockTest {
 		itemList.add(item2);
 		undoRes = new ArrayList<>();
 		undoRes.clear();
-		stock = new Stock(itemList,undoRes);
+//		stock = new Stock(itemList,undoRes);
 		date1 = Calendar.getInstance();
 		date2 = Calendar.getInstance();
 		date2.add(Calendar.DAY_OF_MONTH, 1);

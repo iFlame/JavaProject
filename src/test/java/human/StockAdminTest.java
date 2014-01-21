@@ -43,7 +43,7 @@ public class StockAdminTest {
 		item = new Item(equip,reservList);
 		itemList = new ArrayList<>();
 		itemList.add(item);
-		stock = new Stock(itemList,null);
+	//	stock = new Stock(itemList,null);
 	}
 	
 	@After

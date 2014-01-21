@@ -1,5 +1,6 @@
 package human;
 
+import stockpile.Item;
 import stockpile.Reservation;
 import stockpile.Stock;
 
@@ -16,8 +17,8 @@ public class StockAdministrator extends User {
 	 * 
 	 * @param struct
 	 */
-	public StockAdministrator(Stock stock,String id) {
-		super(stock,id);
+	public StockAdministrator(Stock stock, String id) {
+		super(stock, id);
 		this.setStockAdmin(true);
 	}
 
@@ -25,7 +26,7 @@ public class StockAdministrator extends User {
 	 * Create a default StockAdministrator with a null at stock
 	 */
 	public StockAdministrator() {
-		this(null,null);
+		this(null, null);
 	}
 
 	/**
@@ -38,6 +39,21 @@ public class StockAdministrator extends User {
 	public boolean validation(Reservation reserv) {
 		if (getStock().isAvailable(reserv)) {
 			reserv.setValidate(true);
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * this method check if the stock is full and if it is not the sockAdmin can
+	 * add an item
+	 * 
+	 * @param item
+	 * @return true if the item is add to the stock
+	 */
+	public boolean addStuff(Item item) {
+		if (this.getStock().getItemListSize() < this.getStock().getMaxCapa()) {
+			this.getStock().getObjectList().add(item);
 			return true;
 		}
 		return false;

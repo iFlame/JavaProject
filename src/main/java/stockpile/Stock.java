@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import stockinterface.Constant;
 import supply.Equipment;
 
 /**
@@ -17,22 +18,28 @@ public class Stock {
 
 	private List<Item> objectList;
 	private List<Reservation> undoReservation;
+	private List<Repair> repairList;
+	private int maxCapa;
 
 	/**
 	 * Create a stock with a specific list of items
 	 * 
 	 * @param objectList
 	 */
-	public Stock(List<Item> objectList, List<Reservation> undoReservation) {
+	public Stock(List<Item> objectList, List<Reservation> undoReservation,
+			List<Repair> repList, int maxCapa) {
 		this.objectList = objectList;
 		this.undoReservation = undoReservation;
+		this.repairList = repList;
+		this.maxCapa = maxCapa;
 	}
 
 	/**
 	 * Create a stock with a default empty list of items.
 	 */
 	public Stock() {
-		this(new ArrayList<Item>(), new ArrayList<Reservation>());
+		this(new ArrayList<Item>(), new ArrayList<Reservation>(),
+				new ArrayList<Repair>(), Constant.EXIT_NUMBER);
 	}
 
 	/**
@@ -101,6 +108,19 @@ public class Stock {
 	}
 
 	/**
+	 * This method return the size of the objectList
+	 * 
+	 * @return the size of the list if the list is not null and return 0 if the
+	 *         list is null
+	 */
+	public int getItemListSize() {
+		if (objectList != null) {
+			return objectList.size();
+		}
+		return Constant.EXIT_NUMBER;
+	}
+
+	/**
 	 * 
 	 * @return the list of items
 	 */
@@ -123,6 +143,22 @@ public class Stock {
 
 	public void setUndoReservation(List<Reservation> undoReservation) {
 		this.undoReservation = undoReservation;
+	}
+
+	public List<Repair> getRepairList() {
+		return repairList;
+	}
+
+	public void setRepairList(List<Repair> repairList) {
+		this.repairList = repairList;
+	}
+
+	public int getMaxCapa() {
+		return maxCapa;
+	}
+
+	public void setMaxCapa(int maxCapa) {
+		this.maxCapa = maxCapa;
 	}
 
 }

@@ -48,7 +48,8 @@ public class StockDemo {
 		/**
 		 * Creation of the new stock
 		 */
-		Stock stock = new Stock(itemList, noValidateReservation);
+		// TODO : changer le 0 et le null par les bon paramètre
+		Stock stock = new Stock(itemList, noValidateReservation, null, 0);
 
 		/**
 		 * Creation of the new list of user to complete the structure
