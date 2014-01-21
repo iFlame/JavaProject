@@ -8,5 +8,5 @@ package supply;
  */
 public enum OS {
 
-	IOS, ANDROID, NO_OS;
+	IOS, ANDROID, WINDOWS, NO_OS;
 }

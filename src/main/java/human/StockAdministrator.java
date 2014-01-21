@@ -3,6 +3,7 @@ package human;
 import stockpile.Item;
 import stockpile.Reservation;
 import stockpile.Stock;
+import supply.Equipment;
 
 /**
  * This class create a Stock administator who handle the stock
@@ -39,9 +40,19 @@ public class StockAdministrator extends User {
 	public boolean validation(Reservation reserv) {
 		if (getStock().isAvailable(reserv)) {
 			reserv.setValidate(true);
+			increaseRepair(reserv.getEquipment());
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * This method increase the number of reservation before repair
+	 * 
+	 * @param equip
+	 */
+	private void increaseRepair(Equipment equip) {
+		equip.setRepairTime(equip.getRepairTime() + 1);
 	}
 
 	/**

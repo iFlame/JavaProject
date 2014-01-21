@@ -9,7 +9,7 @@ package supply;
 public class Headset extends Equipment {
 
 	/**
-	 * Create a default headset without OS.
+	 * Create a default headset without OS but with a specific time before repair.
 	 */
 	public Headset() {
 		super();

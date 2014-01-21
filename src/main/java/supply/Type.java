@@ -8,5 +8,5 @@ package supply;
  */
 public enum Type {
 
-	CAMERA, HEADSET, PHONE, TABLETS;
+	CAMERA, HEADSET, PHONE, TABLETS, LAPTOP;
 }

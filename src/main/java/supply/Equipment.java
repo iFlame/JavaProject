@@ -10,6 +10,7 @@ public abstract class Equipment {
 
 	private Type type;
 	private OS os;
+	int repairTime;
 
 	/**
 	 * Create a default Equipment without os and with a type at null
@@ -17,6 +18,21 @@ public abstract class Equipment {
 	public Equipment() {
 		this.os = OS.NO_OS;
 		this.type = null;
+		this.repairTime = 0;
+	}
+
+	/**
+	 * @return the repairTime
+	 */
+	public int getRepairTime() {
+		return repairTime;
+	}
+
+	/**
+	 * @param repairTime the repairTime to set
+	 */
+	public void setRepairTime(int repairTime) {
+		this.repairTime = repairTime;
 	}
 
 	/**

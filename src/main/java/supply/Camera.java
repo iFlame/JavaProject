@@ -9,7 +9,7 @@ package supply;
 public class Camera extends Equipment {
 
 	/**
-	 * Create a camera. 
+	 * Create a camera without OS but with a specific time before repair
 	 */
 	public Camera() {
 		super();
