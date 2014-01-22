@@ -2,11 +2,13 @@ package stockpile;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import stockinterface.Constant;
 import supply.Equipment;
+import supply.Type;
 
 /**
  * Create a stock with a list of items
@@ -112,6 +114,48 @@ public class Stock {
 	 * reservation ( taille de la reservationList ) et addition pour les items
 	 * ayant le meme equipement
 	 */
+	
+	public Type itemMaxReserv(){
+		ArrayList<Type> equip  = new ArrayList<>();
+		ArrayList<Integer> count=new ArrayList<Integer>();
+		for (Item item : objectList ){
+			if (!equip.contains(item.getEquipment().getType())){
+				equip.add(item.getEquipment().getType());
+				count.add(1);
+			}
+			else{
+				count.add(equip.indexOf(item.getEquipment().getType()), 
+				count.get(equip.indexOf(item.getEquipment().getType())+1));
+			}	
+			return equip.get(count.indexOf(Collections.max(count)));
+		}
+		return null;
+
+	}
+	
+	public String biggestBorrower(){
+		ArrayList<String> id  = new ArrayList<>();
+		ArrayList<Integer> count=new ArrayList<Integer>();
+		for (Item item: objectList){
+			for(Reservation reserv: item.getReservationList()){
+				if(!id.contains(reserv.getReservatorID())){
+					id.add(reserv.getReservatorID());
+					count.add(1);
+				}
+				else{
+					count.add(id.indexOf(reserv.getReservatorID()),
+							count.get(id.indexOf(reserv.getReservatorID())+1));
+				}
+			}
+		}
+		return id.get(count.indexOf(Collections.max(count)));
+	}
+			
+		
+	
+		
+			
+		
 	
 	
 	

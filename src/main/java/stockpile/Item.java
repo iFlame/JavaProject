@@ -1,5 +1,7 @@
 package stockpile;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import stockpile.Reservation;
@@ -43,12 +45,52 @@ public class Item {
 	 * @param rien
 	 */
 	
+
+	public String bestBorrower(){
+		ArrayList<String> borrower  = new ArrayList<String>();
+		ArrayList<Integer> count=new ArrayList<Integer>();
+		for (Reservation reserv: reservationList){
+			if (!borrower.contains(reserv.getReservatorID())){
+				borrower.add(reserv.getReservatorID());
+				count.add(1);
+			}
+			else{
+				count.add(borrower.indexOf(reserv.getReservatorID()), 
+						count.get(borrower.indexOf(reserv.getReservatorID())+1));
+			}	
+			return borrower.get(count.indexOf(Collections.max(count)));
+		}
+		return null;
+		
+		
+	}
+	
+	
 	
 	
 	/**
 	 * Methode qui parcours la liste de reservation edt regarde combien de fois le plus emprunteur a emprunté :
 	 * @param rien
 	 */
+	
+	public int numberBorrowing(){
+		ArrayList<String> borrower  = new ArrayList<String>();
+		ArrayList<Integer> count=new ArrayList<Integer>();
+		for (Reservation reserv: reservationList){
+			if (!borrower.contains(reserv.getReservatorID())){
+				borrower.add(reserv.getReservatorID());
+				count.add(1);
+			}
+			else{
+				count.add(borrower.indexOf(reserv.getReservatorID()), 
+						count.get(borrower.indexOf(reserv.getReservatorID())+1));
+			}	
+			return count.indexOf(Collections.max(count));
+		}
+		return 0;
+		
+		
+	}
 	
 	
 	
