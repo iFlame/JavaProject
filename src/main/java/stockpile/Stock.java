@@ -108,6 +108,31 @@ public class Stock {
 	}
 
 	/**
+	 * Parcours la liste des items et conte pour chaque item le nombre de
+	 * reservation ( taille de la reservationList ) et addition pour les items
+	 * ayant le meme equipement
+	 */
+	
+	
+	
+	
+	
+	
+	/**
+	 * Methode qui va conter pour le nombre d'emprunt si la string en parametre est l'id d'un des plus gros emprunteur
+	 * @param string
+	 */
+	
+	
+	
+	/**
+	 * Methode qui renvoie le plus gros emprunteur
+	 */
+	//TODO :
+	
+	
+
+	/**
 	 * This method return the size of the objectList
 	 * 
 	 * @return the size of the list if the list is not null and return 0 if the

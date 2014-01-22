@@ -23,6 +23,15 @@ public class Repair {
 		this.endDate = endDate;
 	}
 
+	
+	
+	public Repair(Equipment equipment) {
+		
+	}
+	
+	
+	
+	
 	/**
 	 * There is all the getters and setters
 	 * 

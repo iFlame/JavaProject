@@ -10,7 +10,8 @@ public abstract class Equipment {
 
 	private Type type;
 	private OS os;
-	int repairTime;
+	private int repairTime;
+	private int maxRepair;
 
 	/**
 	 * Create a default Equipment without os and with a type at null
@@ -19,6 +20,7 @@ public abstract class Equipment {
 		this.os = OS.NO_OS;
 		this.type = null;
 		this.repairTime = 0;
+		this.maxRepair = 0;
 	}
 
 	/**
@@ -67,6 +69,14 @@ public abstract class Equipment {
 	 */
 	public void setOs(OS os) {
 		this.os = os;
+	}
+
+	public int getMaxRepair() {
+		return maxRepair;
+	}
+
+	public void setMaxRepair(int maxRepair) {
+		this.maxRepair = maxRepair;
 	}
 
 }

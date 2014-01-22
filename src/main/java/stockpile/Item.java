@@ -37,6 +37,24 @@ public class Item {
 		this(null, null);
 	}
 
+		
+	/**
+	 * Methode qui parcourt la liste de reservation et renvoie l'id du plus grand emprunteur de cet item :
+	 * @param rien
+	 */
+	
+	
+	
+	/**
+	 * Methode qui parcours la liste de reservation edt regarde combien de fois le plus emprunteur a emprunté :
+	 * @param rien
+	 */
+	
+	
+	
+	
+	
+	
 	/**
 	 * 
 	 * @return the value of the equipment

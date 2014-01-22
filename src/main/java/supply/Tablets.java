@@ -14,6 +14,8 @@ public class Tablets extends Equipment {
 	 */
 	public Tablets() {
 		this(OS.NO_OS);
+		this.setMaxRepair(SupplyConstant.TABLETS_REPAIR_TIME);
+		this.setType(Type.TABLETS);
 	}
 
 	/**
@@ -25,6 +27,8 @@ public class Tablets extends Equipment {
 		super();
 		this.setType(Type.TABLETS);
 		this.setOs(osType);
+		this.setMaxRepair(SupplyConstant.TABLETS_REPAIR_TIME);
+
 	}
 
 }

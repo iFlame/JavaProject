@@ -18,6 +18,8 @@ public class Laptop extends Equipment {
 		super();
 		this.setType(Type.LAPTOP);
 		this.setOs(OS.WINDOWS);
+		this.setMaxRepair(SupplyConstant.LAPTOP_REPAIR_TIME);
+
 	}
 
 }

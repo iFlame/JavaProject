@@ -14,5 +14,6 @@ public class Camera extends Equipment {
 	public Camera() {
 		super();
 		this.setType(Type.CAMERA);
+		this.setMaxRepair(SupplyConstant.CAMERA_REPAIR_TIME);
 	}
 }

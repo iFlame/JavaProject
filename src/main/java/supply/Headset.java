@@ -14,5 +14,7 @@ public class Headset extends Equipment {
 	public Headset() {
 		super();
 		this.setType(Type.HEADSET);
+		this.setMaxRepair(SupplyConstant.HEADSET_REPAIR_TIME);
+
 	}
 }

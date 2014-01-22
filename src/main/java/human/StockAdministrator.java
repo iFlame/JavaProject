@@ -1,6 +1,7 @@
 package human;
 
 import stockpile.Item;
+import stockpile.Repair;
 import stockpile.Reservation;
 import stockpile.Stock;
 import supply.Equipment;
@@ -39,20 +40,31 @@ public class StockAdministrator extends User {
 	 */
 	public boolean validation(Reservation reserv) {
 		if (getStock().isAvailable(reserv)) {
-			reserv.setValidate(true);
-			increaseRepair(reserv.getEquipment());
-			return true;
+			if(increaseRepair(reserv.getEquipment())) {
+				reserv.setValidate(true);
+				return true;
+			}
 		}
 		return false;
 	}
 
 	/**
-	 * This method increase the number of reservation before repair
+	 * This method check the repair time of the equipment. If the equipment have
+	 * a good repair time then the method return true
 	 * 
 	 * @param equip
+	 * @return true if the equipment can be borrow and false if the equipment
+	 *         have to be repair.
 	 */
-	private void increaseRepair(Equipment equip) {
-		equip.setRepairTime(equip.getRepairTime() + 1);
+	private boolean increaseRepair(Equipment equip) {
+		if (equip.getRepairTime() < equip.getMaxRepair()) {
+			equip.setRepairTime(equip.getRepairTime() + 1);
+			return true;
+		} else {
+			Repair repair = new Repair(equip);
+			getStock().getRepairList().add(repair);
+			return false;
+		}
 	}
 
 	/**
@@ -69,5 +81,18 @@ public class StockAdministrator extends User {
 		}
 		return false;
 	}
+
+	/*
+	 * Partie statistique :
+	 */
+
+	/**
+	 * Methode pour savoir qui est le plus gros emprunteur pour un equipement
+	 * precis prend en parametre un item ou un equipement
+	 */
+
+	/**
+	 * Methode pour savoir qu'elle materiel est le plus emprunter
+	 */
 
 }

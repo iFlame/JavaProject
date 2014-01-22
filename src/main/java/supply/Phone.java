@@ -18,6 +18,8 @@ public class Phone extends Equipment {
 		super();
 		this.setType(Type.PHONE);
 		this.setOs(os);
+		this.setMaxRepair(SupplyConstant.PHONE_REPAIR_TIME);
+
 	}
 
 	/**
