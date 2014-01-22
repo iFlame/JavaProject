@@ -42,7 +42,7 @@ public class Item {
 		
 	/**
 	 * Methode qui parcourt la liste de reservation et renvoie l'id du plus grand emprunteur de cet item :
-	 * @param rien
+	 * @return String id du plus gros borrower de l'item
 	 */
 	
 
@@ -69,8 +69,8 @@ public class Item {
 	
 	
 	/**
-	 * Methode qui parcours la liste de reservation edt regarde combien de fois le plus emprunteur a emprunté :
-	 * @param rien
+	 * Methode qui retourne le nombre d'emprunt du plus gros emprunteur de l'item
+	 * @return int nombre emprunts
 	 */
 	
 	public int numberBorrowing(){

@@ -133,6 +133,11 @@ public class Stock {
 
 	}
 	
+	/**
+	 * Methode qui renvoie le plus gros emprunteur
+	 * @return String id du plus gros emprunteur global
+	 */
+	
 	public String biggestBorrower(){
 		ArrayList<String> id  = new ArrayList<>();
 		ArrayList<Integer> count=new ArrayList<Integer>();
@@ -151,28 +156,21 @@ public class Stock {
 		return id.get(count.indexOf(Collections.max(count)));
 	}
 			
-		
-	
-		
-			
-		
-	
-	
-	
 	
 	
 	/**
-	 * Methode qui va conter pour le nombre d'emprunt si la string en parametre est l'id d'un des plus gros emprunteur
-	 * @param string
+	 * Methode qui verifie si l'id de l'emprunteur est l'id du plus gros emprunteur de l'item.
+	 * @param String id
+	 * @param Item item
+	 * @return true si ok sinon false
 	 */
 	
-	
-	
-	/**
-	 * Methode qui renvoie le plus gros emprunteur
-	 */
-	//TODO :
-	
+	public boolean isTheBiggest(String id,Item item){
+		if (item.bestBorrower().equals(id)){
+			return true;
+		}
+		return false;
+	}
 	
 
 	/**
