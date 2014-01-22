@@ -117,7 +117,6 @@ public class Stock {
 	
 	
 	
-	
 	/**
 	 * Methode qui va conter pour le nombre d'emprunt si la string en parametre est l'id d'un des plus gros emprunteur
 	 * @param string
